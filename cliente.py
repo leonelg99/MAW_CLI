@@ -22,6 +22,12 @@ joystick.init()
 
 #Crea la ventana de la camara
 cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
+#when there is no video show not_signal.jpg 
+img = cv2.imread("not_signal.jpg")
+cv2.imshow("MAW CAM", img)
+
+# Inicializa la captura de video desde la cámara (cambia el número de cámara según corresponda)
+cap = cv2.VideoCapture(0)
 
 #KEYS:
 #0: 1
@@ -51,9 +57,12 @@ cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
 
 
 while True:
-    #if ESC is pressed terminate the program 
+    #if ESC is pressed terminate the program
     key = cv2.waitKey(1)
     if key == 27:
+        break
+    #if the window is closed terminate the program
+    if cv2.getWindowProperty("MAW CAM", cv2.WND_PROP_VISIBLE) < 1:
         break
     try:
         for event in pygame.event.get():
@@ -70,9 +79,18 @@ while True:
                 print(data)
                 #client_socket.send(data.encode())
         
-        #pygame.time.delay(50)        #delay 100ms
+               #delay 100ms
     except KeyboardInterrupt:
         pass
+    
+    ##CAMARA
+    try:
+        ret, frame = cap.read() # Captura un cuadro de video
+        cv2.imshow("MAW CAM", frame)
+    except:
+        pass
+     #pygame.time.delay(50)
+
     
 
 
