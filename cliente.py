@@ -1,5 +1,6 @@
 import pygame
 import socket
+import cv2
 
 # Configuración de la conexión Wi-Fi
 SERVER_IP = "192.168.1.100"  # Cambia esto por la dirección IP del MCU
@@ -17,8 +18,10 @@ joystick.init()
 # Inicializar la conexión al servidor
 #client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #client_socket.connect((SERVER_IP, SERVER_PORT))
-
 #client_socket.recv(1024)  # Recibe el mensaje de bienvenida del MCU
+
+#Crea la ventana de la camara
+cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
 
 #KEYS:
 #0: 1
@@ -46,8 +49,13 @@ joystick.init()
 
 
 
-try:
-    while True:
+
+while True:
+    #if ESC is pressed terminate the program 
+    key = cv2.waitKey(1)
+    if key == 27:
+        break
+    try:
         for event in pygame.event.get():
             if event.type == pygame.JOYBUTTONDOWN:
                 button = event.button
@@ -56,15 +64,21 @@ try:
                 #client_socket.send(str(button).encode())
             elif event.type == pygame.JOYAXISMOTION:
                 axis = event.axis
-                value = event.value
+                value = round((event.value)*100)
                 # Envía el valor del eje al MCU (puedes personalizar esta parte)
                 data = f"A{axis}:{value}"
                 print(data)
                 #client_socket.send(data.encode())
+        
+        #pygame.time.delay(50)        #delay 100ms
+    except KeyboardInterrupt:
+        pass
+    
 
-except KeyboardInterrupt:
-    pass
 
-finally:
-    #client_socket.close()
-    pygame.quit()
+   
+
+
+
+#client_socket.close()
+pygame.quit()
