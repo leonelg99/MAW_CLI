@@ -1,6 +1,7 @@
 import pygame
 import socket
 import cv2
+import numpy as np
 
 # Configuración de la conexión Wi-Fi
 SERVER_IP = "192.168.1.100"  # Cambia esto por la dirección IP del MCU
@@ -22,9 +23,6 @@ joystick.init()
 
 #Crea la ventana de la camara
 cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
-#when there is no video show not_signal.jpg 
-img = cv2.imread("not_signal.jpg")
-cv2.imshow("MAW CAM", img)
 
 # Inicializa la captura de video desde la cámara (cambia el número de cámara según corresponda)
 cap = cv2.VideoCapture(0)
