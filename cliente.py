@@ -13,19 +13,26 @@ pygame.init()
 
 # Inicializar el joystick
 pygame.joystick.init()
-joystick = pygame.joystick.Joystick(0)  # Selecciona el primer joystick
-joystick.init()
 
 # Inicializar la conexión al servidor
 #client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #client_socket.connect((SERVER_IP, SERVER_PORT))
 #client_socket.recv(1024)  # Recibe el mensaje de bienvenida del MCU
 
+
+
+
 #Crea la ventana de la camara
-cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
+#cv2.namedWindow("MAW CAM", cv2.WINDOW_GUI_EXPANDED)
+
 
 # Inicializa la captura de video desde la cámara (cambia el número de cámara según corresponda)
 cap = cv2.VideoCapture(0)
+
+
+joystick = pygame.joystick.Joystick(0)  # Selecciona el primer joystick
+joystick.init()
+
 
 #KEYS:
 #0: 1
