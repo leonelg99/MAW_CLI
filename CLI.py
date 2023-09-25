@@ -3,6 +3,7 @@ import socket
 import pygame
 import cv2
 import tkinter as tk
+from PIL import Image, ImageTk
 
 def windowInit():
     #Configuro la ventana
@@ -40,7 +41,16 @@ def windowsGrid():
     #Logo
     LOGO_FRAME = tk.Frame(WINDOW, bg="red")
     LOGO_FRAME.grid(row=0, column=1, sticky="nsew")
-
+    img = Image.open("not_signal.jpg")
+    #RESIZE image to fit in the frame size
+    img = img.resize((WINDOW.winfo_width(),WINDOW.winfo_height()))
+    imagen = ImageTk.PhotoImage(img)
+    LOGO_LABEL = tk.Label(LOGO_FRAME, image=imagen)
+    LOGO_LABEL.grid(row=0, column=0, sticky="nsew")
+    LOGO_LABEL.columnconfigure(0, weight=1)
+    LOGO_LABEL.rowconfigure(0, weight=1)
+    LOGO_LABEL.image = imagen
+    LOGO_LABEL.pack()
     #Terminal
     TERMINAL_FRAME = tk.Frame(WINDOW, bg="green")
     TERMINAL_FRAME.grid(row=1, column=1, rowspan=2, sticky="nsew")
