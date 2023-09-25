@@ -14,8 +14,8 @@ def windowInit():
     WINDOW.configure(bg="darkgrey")
     WINDOW.columnconfigure(0, weight=6)
     WINDOW.columnconfigure(1, weight=4)
-    WINDOW.rowconfigure(0, weight=4)
-    WINDOW.rowconfigure(1, weight=6)
+    WINDOW.rowconfigure(0, weight=2)
+    WINDOW.rowconfigure(1, weight=8)
     return WINDOW
 
 def joystickInit():
@@ -43,7 +43,12 @@ def windowsGrid():
     LOGO_FRAME.grid(row=0, column=1, sticky="nsew")
     img = Image.open("not_signal.jpg")
     #RESIZE image to fit in the frame size
-    img = img.resize((WINDOW.winfo_width(),WINDOW.winfo_height()))
+    #img = img.resize((200,200))
+    fila, columna = LOGO_FRAME.winfo_width(), LOGO_FRAME.winfo_height()
+
+    print(fila,columna)
+
+    img = img.resize((columna,fila))
     imagen = ImageTk.PhotoImage(img)
     LOGO_LABEL = tk.Label(LOGO_FRAME, image=imagen)
     LOGO_LABEL.grid(row=0, column=0, sticky="nsew")
