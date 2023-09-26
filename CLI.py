@@ -14,8 +14,8 @@ def windowInit():
     WINDOW.configure(bg="darkgrey")
     WINDOW.columnconfigure(0, weight=6)
     WINDOW.columnconfigure(1, weight=4)
-    WINDOW.rowconfigure(0, weight=2)
-    WINDOW.rowconfigure(1, weight=8)
+    WINDOW.rowconfigure(0, weight=3)
+    WINDOW.rowconfigure(1, weight=7)
     return WINDOW
 
 def joystickInit():
@@ -30,36 +30,37 @@ def joystickInit():
           joystick.init() 
     return joystick
 
+def cargar_y_mostrar_imagen(LOGO_FRAME):
+    img = Image.open("LOGO.png")
+    max_width = 512
+    max_height = 216
+    img = img.resize((max_width, max_height))
+    print()
+    # Crear una PhotoImage desde la imagen
+    imagen = ImageTk.PhotoImage(img)
+    LOGO_LABEL = tk.Label(LOGO_FRAME, image=imagen, anchor="center")
+    LOGO_LABEL.image = imagen  # Mantén una referencia a la imagen
+    LOGO_LABEL.grid(row=0, column=0,sticky="nsew")
 
 
 def windowsGrid():
 
     #Camera
     CAMERA_FRAME = tk.Frame(WINDOW, bg="blue")
-    CAMERA_FRAME.grid(row=0,column=0, sticky="nsew",rowspan=WINDOW.grid_size()[1])
+    CAMERA_FRAME.grid(row=0, column=0, rowspan=2, sticky="nsew")
+    CAMERA_FRAME.columnconfigure(0, weight=6)
 
     #Logo
     LOGO_FRAME = tk.Frame(WINDOW, bg="red")
-    LOGO_FRAME.grid(row=0, column=1, sticky="nsew")
-    img = Image.open("not_signal.jpg")
-    #RESIZE image to fit in the frame size
-    #img = img.resize((200,200))
-    fila, columna = LOGO_FRAME.winfo_width(), LOGO_FRAME.winfo_height()
-
-    print(fila,columna)
-
-    img = img.resize((columna,fila))
-    imagen = ImageTk.PhotoImage(img)
-    LOGO_LABEL = tk.Label(LOGO_FRAME, image=imagen)
-    LOGO_LABEL.grid(row=0, column=0, sticky="nsew")
-    LOGO_LABEL.columnconfigure(0, weight=1)
-    LOGO_LABEL.rowconfigure(0, weight=1)
-    LOGO_LABEL.image = imagen
-    LOGO_LABEL.pack()
+    LOGO_FRAME.grid(row=0, column=1, rowspan=1, sticky="nsew")
+    LOGO_FRAME.columnconfigure(0, weight=1)
+    LOGO_FRAME.rowconfigure(0, weight=1)
+    cargar_y_mostrar_imagen(LOGO_FRAME)
     #Terminal
     TERMINAL_FRAME = tk.Frame(WINDOW, bg="green")
-    TERMINAL_FRAME.grid(row=1, column=1, rowspan=2, sticky="nsew")
-
+    TERMINAL_FRAME.grid(row=1, column=1, rowspan=2,sticky="nsew")
+    TERMINAL_FRAME.columnconfigure(1, weight=4)
+    TERMINAL_FRAME.rowconfigure(1, weight=7)
 
 
 
