@@ -1,81 +1,72 @@
-# Importa los módulos necesarios
 import socket
-import pygame
 import cv2
 import tkinter as tk
 from PIL import Image, ImageTk
 
+def connectionInit():
+    IP = "192.168.0.3"
+    PORT = 80
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        client.connect((IP, PORT))
+        message = "Connection successful"
+        client.sendall(message.encode())
+        dat=client.recv(1024)
+        print("Respuesta",dat)
+    except Exception as e:
+        print("Error al conectar: ",str(e))
+    return client
+
 def windowInit():
-    #Configuro la ventana
+    # Configurar la ventana
     WINDOW = tk.Tk()
     WINDOW.title("MAW")
-    WINDOW.resizable(1,1)
-    WINDOW.minsize(1280,720)
+    WINDOW.resizable(1, 1)
+    WINDOW.minsize(1280, 720)
     WINDOW.configure(bg="darkgrey")
-    WINDOW.columnconfigure(0, weight=6)
-    WINDOW.columnconfigure(1, weight=4)
-    WINDOW.rowconfigure(0, weight=3)
-    WINDOW.rowconfigure(1, weight=7)
+    WINDOW.columnconfigure(0, weight=7)
+    WINDOW.columnconfigure(1, weight=3)
+    WINDOW.rowconfigure(0, weight=2)
+    WINDOW.rowconfigure(1, weight=8)
     return WINDOW
 
-def joystickInit():
-    #Configuro el joystick
-    pygame.init()
-    pygame.joystick.init()
-    if pygame.joystick.get_count() == 0:
-        print("No se ha detectado ningún joystick")
-        return False
-    else: 
-          joystick = pygame.joystick.Joystick(0)
-          joystick.init() 
-    return joystick
-
-def cargar_y_mostrar_imagen(LOGO_FRAME):
+def cargar_y_mostrar_imagen():
     img = Image.open("LOGO.png")
-    max_width = 512
+    max_width = 280
     max_height = 216
-    img = img.resize((max_width, max_height))
-    print()
+    img.thumbnail((max_width, max_height))
     # Crear una PhotoImage desde la imagen
     imagen = ImageTk.PhotoImage(img)
-    LOGO_LABEL = tk.Label(LOGO_FRAME, image=imagen, anchor="center")
+    LOGO_LABEL = tk.Label(image=imagen, anchor="center")
     LOGO_LABEL.image = imagen  # Mantén una referencia a la imagen
-    LOGO_LABEL.grid(row=0, column=0,sticky="nsew")
 
+    # Configurar el tamaño máximo para la columna y fila
+    LOGO_LABEL.grid(row=0, column=1, sticky="nsew")
+    LOGO_LABEL.grid_rowconfigure(0, weight=1)
+    LOGO_LABEL.grid_columnconfigure(1, weight=1)
 
 def windowsGrid():
-
-    #Camera
+    # Camera
     CAMERA_FRAME = tk.Frame(WINDOW, bg="blue")
     CAMERA_FRAME.grid(row=0, column=0, rowspan=2, sticky="nsew")
     CAMERA_FRAME.columnconfigure(0, weight=6)
 
-    #Logo
-    LOGO_FRAME = tk.Frame(WINDOW, bg="red")
-    LOGO_FRAME.grid(row=0, column=1, rowspan=1, sticky="nsew")
-    LOGO_FRAME.columnconfigure(0, weight=1)
-    LOGO_FRAME.rowconfigure(0, weight=1)
-    cargar_y_mostrar_imagen(LOGO_FRAME)
-    #Terminal
+    # Logo
+    cargar_y_mostrar_imagen()
+
+    # Terminal
     TERMINAL_FRAME = tk.Frame(WINDOW, bg="green")
-    TERMINAL_FRAME.grid(row=1, column=1, rowspan=2,sticky="nsew")
+    TERMINAL_FRAME.grid(row=1, column=1, rowspan=2, sticky="nsew")
     TERMINAL_FRAME.columnconfigure(1, weight=4)
     TERMINAL_FRAME.rowconfigure(1, weight=7)
 
-
-
 # Código principal
 if __name__ == "__main__":
-    
-    #Configuracion
-    # Configurar Pygame para el joystick
-    JOYSTICK = joystickInit()
-    # Configurar CV2 para la cámara
-    CAP = cv2.VideoCapture(0)
-    # Configurar Tkinter para la ventana
-    WINDOW=windowInit()
-    #Diseño de ventana
-
+    # Configuraciones iniciales y diseño de ventana
+    #JOYSTICK = joystickInit()
+    #cliente=connectionInit()
+    #CAP = cv2.VideoCapture(0)
+    WINDOW = windowInit()
     windowsGrid()
 
     WINDOW.mainloop()
