@@ -69,12 +69,13 @@ def windowsGrid():
     TERMINAL_SCROLLBAR = tk.Scrollbar(TERNMINAL_EVENTS, command=TERMINAL_TEXT.yview)
     TERMINAL_SCROLLBAR.grid(row=0, column=1, sticky="nsew")
     TERMINAL_TEXT["yscrollcommand"] = TERMINAL_SCROLLBAR.set
+    TERMINAL_TEXT.tag_configure("warning", foreground="yellow", font=("Verdana", 12, "bold"))
+    TERMINAL_TEXT.tag_configure("normal", foreground="black", font=("Verdana", 12, "normal"))
+    TERMINAL_TEXT.tag_configure("timestamp", foreground="gray", font=("Verdana", 10, "normal"))
 
-def add_message(message,style):
+def add_message(message,style=None):
     timestamp = datetime.datetime.now().strftime("%H:%M:%S")  # Obtiene la hora actual en formato HH:MM
-    message_with_timestamp = f"{timestamp} - {message}"
-    if style == "warning":
-        message_with_timestamp.upper()
-        TERMINAL_TEXT.insert(tk.END, message_with_timestamp + "\n")
-    else: TERMINAL_TEXT.insert(tk.END, message_with_timestamp + "\n")
+    TERMINAL_TEXT.insert(tk.END, timestamp + " - ")
+    TERMINAL_TEXT.insert(tk.END, message + "\n", style)
     TERMINAL_TEXT.see(tk.END)
+    
