@@ -1,0 +1,7 @@
+
+# ESP32-CAM IP and port
+ESP32_CAM_IP = "-"
+ESP32_CAM_PORT = 80
+
+
+
