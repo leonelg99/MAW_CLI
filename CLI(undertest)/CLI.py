@@ -5,7 +5,8 @@ from connection import connectionInit
 from interfaz import WINDOW, windowsGrid, windowInit
 from video import recivirImagen 
 from joystick import joystickRead
-def main():
+
+def threads():
     #wifi_thread = threading.Thread(target=connectionInit)
     #wifi_thread.daemon = True
     #wifi_thread.start()  
@@ -18,8 +19,7 @@ def main():
 
 # Código principal
 if __name__ == "__main__":
-    #joystickRead()
     windowInit()
     windowsGrid()
-    main()
+    threads()
     WINDOW.mainloop()

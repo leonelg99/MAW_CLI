@@ -1,6 +1,6 @@
 import pygame
 import time
-
+from interfaz import add_message
 #KEYS:
 #0: 1
 #1: 2
@@ -30,7 +30,7 @@ def joystickInit():
     pygame.joystick.init()
     
     while(pygame.joystick.get_count()<=0):
-        print("Conecte un joystick")
+        add_message("Conecte un joystick","warning")
         time.sleep(2)
 
     joystick = pygame.joystick.Joystick(0)  # Selecciona el primer joystick

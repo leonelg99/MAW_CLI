@@ -1,6 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-
+import datetime
 WINDOW = tk.Tk()
 
 def windowInit():
@@ -8,7 +8,7 @@ def windowInit():
     #WINDOW = tk.Tk()
     WINDOW.title("MAW")
     WINDOW.resizable(1, 1)
-    WINDOW.minsize(1280, 720)
+    WINDOW.minsize(1080, 720)
     WINDOW.configure(bg="darkgrey")
     WINDOW.columnconfigure(0, weight=6)
     WINDOW.columnconfigure(1, weight=4)
@@ -70,6 +70,11 @@ def windowsGrid():
     TERMINAL_SCROLLBAR.grid(row=0, column=1, sticky="nsew")
     TERMINAL_TEXT["yscrollcommand"] = TERMINAL_SCROLLBAR.set
 
-def add_message(message):
-    TERMINAL_TEXT.insert(tk.END, message + "\n")
+def add_message(message,style):
+    timestamp = datetime.datetime.now().strftime("%H:%M:%S")  # Obtiene la hora actual en formato HH:MM
+    message_with_timestamp = f"{timestamp} - {message}"
+    if style == "warning":
+        message_with_timestamp.upper()
+        TERMINAL_TEXT.insert(tk.END, message_with_timestamp + "\n")
+    else: TERMINAL_TEXT.insert(tk.END, message_with_timestamp + "\n")
     TERMINAL_TEXT.see(tk.END)
