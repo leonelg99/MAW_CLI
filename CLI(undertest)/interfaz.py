@@ -63,15 +63,19 @@ def windowsGrid():
     global TERMINAL_TEXT
     TERMINAL_TEXT = tk.Text(TERNMINAL_EVENTS, bg="black", fg="white", font=("Consolas", 12),  wrap=tk.WORD)
     TERMINAL_TEXT.grid(row=0, column=0, sticky="nsew")
-
+    TERMINAL_TEXT.tag_configure("error", foreground="red", font=("Verdana", 12, "bold"))
+    TERMINAL_TEXT.tag_configure("warning", foreground="yellow", font=("Verdana", 12, "bold"))
+    TERMINAL_TEXT.tag_configure("success", foreground="green", font=("Verdana", 12, "bold"))
+    TERMINAL_TEXT.tag_configure("normal", foreground="white", font=("Verdana", 12, "normal"))
+    TERMINAL_TEXT.tag_configure("timestamp", foreground="gray", font=("Verdana", 10, "normal"))
+    TERMINAL_TEXT.tag_configure("process", foreground="#FF00EF", font=("Verdana", 12, "bold"))
+    TERMINAL_TEXT.tag_configure("incoming", foreground="#00FFFF", font=("Verdana", 12, "bold"))
     # Scrollbar
     
     TERMINAL_SCROLLBAR = tk.Scrollbar(TERNMINAL_EVENTS, command=TERMINAL_TEXT.yview)
     TERMINAL_SCROLLBAR.grid(row=0, column=1, sticky="nsew")
     TERMINAL_TEXT["yscrollcommand"] = TERMINAL_SCROLLBAR.set
-    TERMINAL_TEXT.tag_configure("warning", foreground="yellow", font=("Verdana", 12, "bold"))
-    TERMINAL_TEXT.tag_configure("normal", foreground="black", font=("Verdana", 12, "normal"))
-    TERMINAL_TEXT.tag_configure("timestamp", foreground="gray", font=("Verdana", 10, "normal"))
+
 
 def add_message(message,style=None):
     timestamp = datetime.datetime.now().strftime("%H:%M:%S")  # Obtiene la hora actual en formato HH:MM

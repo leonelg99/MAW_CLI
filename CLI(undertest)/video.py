@@ -1,9 +1,8 @@
 from shared_variables import ESP32_CAM_IP, ESP32_CAM_PORT
 from interfaz import WINDOW
-from connection import connection_event
+from connection import connection_event, connectionClose
 import cv2
 from PIL import Image, ImageTk
-
 
 
 def recivirImagen():
@@ -22,7 +21,8 @@ def recivirImagen():
         WINDOW.CAMERA_LABEL.image = imagen
         #CAMERA_LABEL.configure(image=imagen)
         #CAMERA_LABEL.image = imagen
-        if cv2.waitKey(1) == ord("q"):
-            break
+        #if cv2.waitKey(1) == ord("q"):
+            #break
     cap.release()
     cv2.destroyAllWindows()
+    connectionClose()

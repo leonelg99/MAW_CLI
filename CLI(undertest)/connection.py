@@ -3,10 +3,11 @@ import tkinter as tk
 from tkinter import messagebox
 import threading
 from shared_variables import ESP32_CAM_IP, ESP32_CAM_PORT
-from interfaz import WINDOW
+from interfaz import WINDOW,add_message
 import time
+import sys
 connection_event = threading.Event()
-
+ 
 def show_error_message():
     root = tk.Tk()
     root.withdraw()  # Oculta la ventana principal de tkinter
@@ -28,12 +29,13 @@ def connectionInit():
             message = "Connection successful"
             client.sendall(message.encode())
             dat=client.recv(1024)
-            print("Respuesta",dat)
+            add_message("Respuesta {dat}","process")
             connection_event.set()
             break
         except Exception as e:
             trys+=1
             print("Error al conectar: ",str(e))
+            add_message("Error al conectar: "+str(e),"error")
             if(trys>=5):
                 show_error_message()
             else:
@@ -42,5 +44,36 @@ def connectionInit():
                    WINDOW.destroy()
                    sys.exit()
                 else:
-                    time.sleep(0.5)          
-               
+                    time.sleep(0.5)    
+    incoming_message_thread = threading.Thread(target=recivirMensajes)
+    incoming_message_thread.daemon = True
+    incoming_message_thread.start()      
+
+
+def connectionClose():
+    connection_event.clear()
+    client.close()
+    add_message("Conexión cerrada","error")
+    time.sleep(1)
+    WINDOW.destroy()
+    sys.exit()
+
+def sendCommand(command):
+    try:
+        client.sendall(command.encode())
+        add_message(command,"process")
+    except Exception as e:
+        add_message("Error al enviar comando: "+str(e),"error")
+        connectionClose()
+
+def recivirMensajes():
+    while True:
+        try:
+            data = client.recv(1024)
+            if data:
+                add_message(data.decode(),"incoming")
+        except Exception as e:
+            add_message("Error al recibir datos: "+str(e),"error")
+            connectionClose()
+        time.sleep(1)
+    

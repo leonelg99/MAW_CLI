@@ -60,15 +60,16 @@ def joystickRead():
                 for event in pygame.event.get():
                     if event.type == pygame.JOYBUTTONDOWN:
                         button = event.button
-                        print(f"Botón presionado: {button}")
+                        #print(f"Botón presionado: {button}")
                         add_message(KEY_MAPS[button], "normal")
                     elif event.type == pygame.JOYAXISMOTION:
                         axis = event.axis
                         value = round((event.value)*100)
                         data = f"A{axis}:{value}"
                         add_message(data, "normal")
-                        print(f"Eje {axis}: {value}%")
+                        message = f"{value}A{axis}"
+                        #print(f"Eje {axis}: {value}%")
             except KeyboardInterrupt:
                 pass
-            time.sleep(0.2)
+            time.sleep(0.6)
     

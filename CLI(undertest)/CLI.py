@@ -10,6 +10,9 @@ def threads():
     #wifi_thread = threading.Thread(target=connectionInit)
     #wifi_thread.daemon = True
     #wifi_thread.start()  
+    #incoming_message_thread = threading.Thread(target=recivirMensajes)
+    #incoming_message_thread.daemon = True
+    #incoming_message_thread.start()
     #video_thread = threading.Thread(target=recivirImagen)
     #video_thread.daemon = True
     #video_thread.start()
