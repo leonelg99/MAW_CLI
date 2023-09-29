@@ -26,9 +26,10 @@ def connectionInit():
     while (trys<5):
         try:
             client.connect((ESP32_CAM_IP, ESP32_CAM_PORT))
-            message = "Connection successful"
+            message = "Connection successful\n"
+            add_message(message,"success")
             client.sendall(message.encode())
-            dat=client.recv(1024)
+            dat=client.recv(1024).decode()
             add_message("Respuesta {dat}","process")
             connection_event.set()
             break
@@ -74,6 +75,6 @@ def recivirMensajes():
                 add_message(data.decode(),"incoming")
         except Exception as e:
             add_message("Error al recibir datos: "+str(e),"error")
-            connectionClose()
+            #connectionClose()
         time.sleep(1)
     
