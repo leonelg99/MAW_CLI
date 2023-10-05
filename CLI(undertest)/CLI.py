@@ -7,9 +7,9 @@ from video import recivirImagen
 from joystick import joystickRead
 
 def threads():
-    wifi_thread = threading.Thread(target=connectionInit)
-    wifi_thread.daemon = True
-    wifi_thread.start()  
+    #wifi_thread = threading.Thread(target=connectionInit)
+    #wifi_thread.daemon = True
+    #wifi_thread.start()  
     #incoming_message_thread = threading.Thread(target=recivirMensajes)
     #incoming_message_thread.daemon = True
     #incoming_message_thread.start()

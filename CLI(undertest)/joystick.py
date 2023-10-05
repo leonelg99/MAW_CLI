@@ -1,6 +1,7 @@
 import pygame
 import time
 from interfaz import add_message
+from conecctionv2 import sendMessage
 #KEYS:
 #0: 1
 #1: 2
@@ -62,6 +63,7 @@ def joystickRead():
                         button = event.button
                         #print(f"Botón presionado: {button}")
                         add_message(KEY_MAPS[button], "normal")
+                        sendMessage(KEY_MAPS[button],0)
                     elif event.type == pygame.JOYAXISMOTION:
                         axis = event.axis
                         value = round((event.value)*100)
