@@ -23,7 +23,7 @@ def reciveMessages():
         server.bind((SERVER_IP, SERVER_PORT))
         server.listen()
         
-        with True:
+        while True:
             client_socket, client_address = server.accept()
 
             data = client_socket.recv(1024)

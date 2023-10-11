@@ -2,6 +2,7 @@ import pygame
 import time
 from interfaz import add_message
 from conecctionv2 import sendMessage
+import math
 #KEYS:
 #0: 1
 #1: 2
@@ -66,12 +67,32 @@ def joystickRead():
                         sendMessage(KEY_MAPS[button],0)
                     elif event.type == pygame.JOYAXISMOTION:
                         axis = event.axis
-                        value = round((event.value)*100)
-                        data = f"A{axis}:{value}"
-                        add_message(data, "normal")
-                        message = f"{value}A{axis}"
+                        percent = value = event.value
+                        
+                        if axis ==0 or axis == 1:
+                            name = "left"
+                            x_axis = joystick.get_axis(0)
+                            y_axis = joystick.get_axis(1)
+                        elif axis == 2 or axis == 3:
+                            name = "right"
+                            x_axis = joystick.get_axis(2)
+                            y_axis = joystick.get_axis(3)
+                        else:
+                            continue
+                    
+                        # Calcula el ángulo en radianes
+                        radians = math.atan2(-y_axis, x_axis)
+                        degrees = math.degrees(radians)
+                        if degrees < 0:
+                            degrees += 360
+
+                        print(f"Stick: {name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}")
+                        
+                        message = f"Stick: {name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}"
+
+
+                        add_message(message, "normal")
                         #print(f"Eje {axis}: {value}%")
             except KeyboardInterrupt:
                 pass
             time.sleep(0.6)
-    
