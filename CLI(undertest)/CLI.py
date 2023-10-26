@@ -1,9 +1,9 @@
 
 import tkinter as tk
 import threading
-from connection import connectionInit
+#from connection import connectionInit
 from interfaz import WINDOW, windowsGrid, windowInit
-from video import recivirImagen 
+#from video import recivirImagen 
 from joystick import joystickRead
 
 def threads():

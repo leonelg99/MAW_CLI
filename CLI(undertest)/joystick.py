@@ -1,7 +1,7 @@
 import pygame
 import time
 from interfaz import add_message
-from conecctionv2 import sendMessage
+from connection import sendMessage
 import math
 #KEYS:
 #0: 1
@@ -62,19 +62,18 @@ def joystickRead():
                 for event in pygame.event.get():
                     if event.type == pygame.JOYBUTTONDOWN:
                         button = event.button
-                        #print(f"Botón presionado: {button}")
                         add_message(KEY_MAPS[button], "normal")
-                        sendMessage(KEY_MAPS[button],0)
+                        sendMessage(KEY_MAPS[button],0,0)
                     elif event.type == pygame.JOYAXISMOTION:
                         axis = event.axis
                         percent = value = event.value
                         
                         if axis ==0 or axis == 1:
-                            name = "left"
+                            name = "SL"
                             x_axis = joystick.get_axis(0)
                             y_axis = joystick.get_axis(1)
                         elif axis == 2 or axis == 3:
-                            name = "right"
+                            name = "SR"
                             x_axis = joystick.get_axis(2)
                             y_axis = joystick.get_axis(3)
                         else:
@@ -86,13 +85,13 @@ def joystickRead():
                         if degrees < 0:
                             degrees += 360
 
-                        print(f"Stick: {name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}")
+                        #print(f"S{name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}")
                         
-                        message = f"Stick: {name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}"
-
-
+                        message = f"{name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}"
+                        
+                        sendMessage(f"{name}",f"{degrees:.2}",f"{round(percent*100)}")
+                        #sendMessage("S{name}",0,0)
                         add_message(message, "normal")
-                        #print(f"Eje {axis}: {value}%")
             except KeyboardInterrupt:
                 pass
             time.sleep(0.6)
