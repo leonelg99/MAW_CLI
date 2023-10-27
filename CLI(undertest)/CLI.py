@@ -1,18 +1,22 @@
 
 import tkinter as tk
 import threading
-#from connection import connectionInit
+from connection import reciveMessages, obtener_ipv4, sendIP
 from interfaz import WINDOW, windowsGrid, windowInit
 #from video import recivirImagen 
 from joystick import joystickRead
 
+def receiveMsg():
+    while True:
+        reciveMessages()
+        time.sleep(0.05)
+    
+
+
 def threads():
-    #wifi_thread = threading.Thread(target=connectionInit)
-    #wifi_thread.daemon = True
-    #wifi_thread.start()  
-    #incoming_message_thread = threading.Thread(target=recivirMensajes)
-    #incoming_message_thread.daemon = True
-    #incoming_message_thread.start()
+    incoming_message_thread = threading.Thread(target=receiveMsg)
+    incoming_message_thread.daemon = True
+    incoming_message_thread.start()
     #video_thread = threading.Thread(target=recivirImagen)
     #video_thread.daemon = True
     #video_thread.start()
@@ -22,6 +26,9 @@ def threads():
 
 # Código principal
 if __name__ == "__main__":
+    SERVER_IP=obtener_ipv4()
+    print(SERVER_IP)
+    sendIP(SERVER_IP)
     windowInit()
     windowsGrid()
     threads()
