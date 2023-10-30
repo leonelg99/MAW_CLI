@@ -1,11 +1,10 @@
-
 import tkinter as tk
 import threading
-from connection import reciveMessages, obtener_ipv4, sendIP
+from connection import reciveMessages, obtener_ipv4
 from interfaz import WINDOW, windowsGrid, windowInit
 #from video import recivirImagen 
 from joystick import joystickRead
-
+import time
 def receiveMsg():
     while True:
         reciveMessages()
@@ -28,7 +27,6 @@ def threads():
 if __name__ == "__main__":
     SERVER_IP=obtener_ipv4()
     print(SERVER_IP)
-    sendIP(SERVER_IP)
     windowInit()
     windowsGrid()
     threads()
