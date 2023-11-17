@@ -8,7 +8,7 @@ import time
 def receiveMsg():
     while True:
         reciveMessages()
-        time.sleep(0.05)
+        time.sleep(0.2)
     
 
 

@@ -29,10 +29,12 @@ def reciveMessages():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((ESP32_CAM_IP,ESP32_CAM_PORT))
             s.sendall("get:0:0:0\n".encode())
-            data = s.recv(1024).decode()
-            if(data is not ""):
-                add_message(data,"normal")
-            else: print("No data")
+            data = s.recv(1024).decode('utf-8')
+            if(data != ""):
+                print("here")
+                add_message(data,"success")
+                print(data)
+            else: print("Nothing here!")
     except Exception as e:
         add_message("Error al recibir comando: "+str(e),"error")
     finally:
