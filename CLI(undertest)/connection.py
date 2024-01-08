@@ -31,10 +31,7 @@ def reciveMessages():
             s.sendall("get:0:0:0\n".encode())
             data = s.recv(1024).decode('utf-8')
             if(data != ""):
-                print("here")
                 add_message(data,"success")
-                print(data)
-            else: print("Nothing here!")
     except Exception as e:
         add_message("Error al recibir comando: "+str(e),"error")
     finally:

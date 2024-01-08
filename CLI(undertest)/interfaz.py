@@ -39,7 +39,8 @@ def windowsGrid():
     #img.thumbnail((768,432))
     #img.resize((68,20))
     imagen=ImageTk.PhotoImage(img)
-    CAMERA_LABEL = tk.Label(image=imagen,width=768, height=432, anchor="center")
+    global CAMERA_LABEL
+    CAMERA_LABEL = tk.Label(image=imagen,width=768, height=432, anchor="center",bg="black")
     CAMERA_LABEL.image = imagen  # Mantén una referencia a la imagen
     CAMERA_LABEL.grid(row=0, column=0,rowspan=2, sticky="nsew")
  
@@ -82,4 +83,7 @@ def add_message(message,style=None):
     TERMINAL_TEXT.insert(tk.END, timestamp + " - ")
     TERMINAL_TEXT.insert(tk.END, message + "\n", style)
     TERMINAL_TEXT.see(tk.END)
-    
+
+def update_camera(image):
+    CAMERA_LABEL.configure(image=image)
+    CAMERA_LABEL.image = image
