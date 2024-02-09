@@ -17,7 +17,7 @@ def sendMessage(data,data2,data3):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
          s.connect((ESP32_CAM_IP,ESP32_CAM_PORT))
          s.sendall(makeMessage(data,data2,data3))
-         print(s.recv(1024))
+         #print(s.recv(1024))
     except Exception as e:
        add_message("Error al enviar comando: "+str(e),"error")
     finally:
@@ -31,6 +31,7 @@ def reciveMessages():
             s.sendall("get:0:0:0\n".encode())
             data = s.recv(1024).decode('utf-8')
             if(data != ""):
+                print(data)
                 add_message(data,"success")
     except Exception as e:
         add_message("Error al recibir comando: "+str(e),"error")

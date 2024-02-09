@@ -11,7 +11,7 @@ import datetime
 import time
 import sys
 
-url = 'http://192.168.4.1'
+url = 'http://192.168.4.1:8020'
 
 def recivirImagen():
     CAMERA_BUFFRER_SIZE=4096

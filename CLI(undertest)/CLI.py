@@ -12,8 +12,8 @@ def receiveMsg():
         time.sleep(0.2)
     
 
-
 def threads():
+
     incoming_message_thread = threading.Thread(target=receiveMsg)
     incoming_message_thread.daemon = True
     incoming_message_thread.start()
@@ -23,6 +23,7 @@ def threads():
     joystick_thread = threading.Thread(target=joystickRead)
     joystick_thread.daemon = True
     joystick_thread.start()
+
 
 # Código principal
 if __name__ == "__main__":

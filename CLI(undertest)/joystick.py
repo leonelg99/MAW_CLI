@@ -84,12 +84,12 @@ def joystickRead():
                         degrees = math.degrees(radians)
                         if degrees < 0:
                             degrees += 360
-
                         #print(f"S{name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}")
                         
-                        message = f"{name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}"
+                        message = f"{name} Ángulo: {degrees} grados Porcentaje: {round(percent*100)}"
                         
                         sendMessage(f"{name}",f"{degrees:.2}",f"{round(percent*100)}")
+                        print(f"{name}",f"{degrees:.2}",f"{round(percent*100)}")
                         #sendMessage("S{name}",0,0)
                         add_message(message, "normal")
             except KeyboardInterrupt:
