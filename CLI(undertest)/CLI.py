@@ -27,8 +27,6 @@ def threads():
 
 # Código principal
 if __name__ == "__main__":
-    SERVER_IP=obtener_ipv4()
-    print(SERVER_IP)
     windowInit()
     windowsGrid()
     threads()

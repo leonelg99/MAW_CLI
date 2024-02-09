@@ -82,16 +82,17 @@ def joystickRead():
                         # Calcula el ángulo en radianes
                         radians = math.atan2(-y_axis, x_axis)
                         degrees = math.degrees(radians)
+                      
                         if degrees < 0:
                             degrees += 360
-                        #print(f"S{name} Ángulo: {degrees:.2f} grados Porcentaje: {round(percent*100)}")
                         
-                        message = f"{name} Ángulo: {degrees} grados Porcentaje: {round(percent*100)}"
+                        degrees_int = int(degrees)
+                
+                        message = f"{name} Ángulo: {degrees_int} grados Porcentaje: {round(percent*100)}"
                         
-                        sendMessage(f"{name}",f"{degrees:.2}",f"{round(percent*100)}")
-                        print(f"{name}",f"{degrees:.2}",f"{round(percent*100)}")
-                        #sendMessage("S{name}",0,0)
+                        sendMessage(f"{name}",degrees_int,f"{round(percent*100)}")
+                        print(f"{name}",degrees_int,f"{round(percent*100)}")
                         add_message(message, "normal")
             except KeyboardInterrupt:
                 pass
-            time.sleep(0.6)
+            time.sleep(0.2)
