@@ -38,8 +38,8 @@ KEY_MAPS = {
     7: "R2",
     8: "Select",
     9: "Start",
-    10: "SL",
-    11: "SR"
+    10: "SLL",
+    11: "SRR"
 }
 
 def joystickInit():
