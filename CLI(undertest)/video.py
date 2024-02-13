@@ -13,7 +13,9 @@ import sys
 
 url = 'http://192.168.4.1:8020'
 
+
 def recivirImagen():
+    flag = 0
     CAMERA_BUFFRER_SIZE=4096
     stream=urlopen(url)
     bts=b''
@@ -46,5 +48,7 @@ def recivirImagen():
             print(f"Error en la solicitud: {e}")
             bts=b''
             stream=urlopen(url)
-            break
-    cv2.destroyAllWindows()
+            if(flag<10):
+                time.sleep(1)
+                flag+=1
+            else: break

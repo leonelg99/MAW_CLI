@@ -3,7 +3,7 @@ import threading
 from connection import reciveMessages, obtener_ipv4
 from interfaz import WINDOW, windowsGrid, windowInit
 from video import recivirImagen 
-from joystick import joystickRead
+from joystick import joystickRead2 
 import time
 
 def receiveMsg():
@@ -20,7 +20,7 @@ def threads():
     video_thread = threading.Thread(target=recivirImagen)
     video_thread.daemon = True
     video_thread.start()
-    joystick_thread = threading.Thread(target=joystickRead)
+    joystick_thread = threading.Thread(target=joystickRead2)
     joystick_thread.daemon = True
     joystick_thread.start()
 
