@@ -35,5 +35,10 @@ El programa solo requiere estar conectado a la red generada por el vehiculo, ten
 <li><b>L1:</b> Abrir garra por completo</li>
 <li><b>L2:</b> Cerrar garra por completoC</li>
 <li><b>R3:</b> Brazo go Home (el brazo regresa a su posicion de estacionamiento) </li>
-<il><b>SR:</b><ul> <li>Control del Vehiculo: Adelante/Atras/Rotar/Doblar </li> <li>Control del brazo: Extender/Retraer/Rotar</li></ul> </il>
+<li><b>SR:</b>
+        <ul>
+            <li>Control del Vehículo: Adelante/Atrás/Rotar/Doblar</li>
+            <li>Control del brazo: Extender/Retraer/Rotar</li>
+        </ul>
+    </li>
 <li><b>SL:</b> Control del Brazo: Elevar/Bajar</li>
