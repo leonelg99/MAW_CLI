@@ -16,7 +16,7 @@ El programa solo requiere estar conectado a la red generada por el vehiculo, ten
 <li>urllib</li>
 <li>numpy</li>
 
-<h2><b>Requerimientos</b></h2>
+<h2><b>Advertencia</b></h2>
 <p>El programa surge de la necesidad de tener un software que permita controlar el vehiculo, mas no era un objetivo del proyecto, por tanto se opto por la simplicidad y funcionalidad. Este software puede presentar errores sino se usa de la manera y contexto adecuado.</p>
 
 <h2><b>Modo de Uso</b></h2>
