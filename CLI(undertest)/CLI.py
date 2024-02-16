@@ -1,26 +1,19 @@
 import tkinter as tk
 import threading
-from connection import reciveMessages, obtener_ipv4
+from connection import reciveMessages
 from interfaz import WINDOW, windowsGrid, windowInit
 from video import recivirImagen 
-from joystick import joystickRead2 
-import time
+from joystick import joystickRead
 
-def receiveMsg():
-    while True:
-        reciveMessages()
-        time.sleep(0.2)
-    
-
+# Inicializa los hilos
 def threads():
-
-    incoming_message_thread = threading.Thread(target=receiveMsg)
+    incoming_message_thread = threading.Thread(target=reciveMessages)
     incoming_message_thread.daemon = True
-    incoming_message_thread.start()
+    #incoming_message_thread.start()
     video_thread = threading.Thread(target=recivirImagen)
     video_thread.daemon = True
-    video_thread.start()
-    joystick_thread = threading.Thread(target=joystickRead2)
+    #video_thread.start()
+    joystick_thread = threading.Thread(target=joystickRead)
     joystick_thread.daemon = True
     joystick_thread.start()
 

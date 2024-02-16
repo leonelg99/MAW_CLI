@@ -11,9 +11,10 @@ import datetime
 import time
 import sys
 
+# URL de la cámara
 url = 'http://192.168.4.1:8020'
 
-
+# Recibe la imagen de la cámara
 def recivirImagen():
     flag = 0
     CAMERA_BUFFRER_SIZE=4096
@@ -35,15 +36,6 @@ def recivirImagen():
                 photo = ImageTk.PhotoImage(img)
                 update_camera(photo)
             k=cv2.waitKey(1)
-            #img=Image.fromarray(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB))
-            #img.thumbnail((480,360))
-            #imagen = ImageTk.PhotoImage(img)
-            #WINDOW.CAMERA_LABEL.configure(image=imagen)
-            #WINDOW.CAMERA_LABEL.image = imagen
-            #CAMERA_LABEL.configure(image=imagen)
-            #CAMERA_LABEL.image = imagen
-            #if cv2.waitKey(1) == ord("q"):
-                #break
         except requests.exceptions.RequestException as e:
             print(f"Error en la solicitud: {e}")
             bts=b''

@@ -1,8 +1,11 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import datetime
+
+# Variable global para la ventana
 WINDOW = tk.Tk()
 
+# Inicializa la ventana
 def windowInit():
     # Configurar la ventana
     #WINDOW = tk.Tk()
@@ -15,7 +18,7 @@ def windowInit():
     WINDOW.rowconfigure(0, weight=2)
     WINDOW.rowconfigure(1, weight=8)
 
-
+# Carga y muestra la imagen
 def cargar_y_mostrar_imagen():
     img = Image.open("LOGO.png")
     max_width = 280
@@ -31,6 +34,7 @@ def cargar_y_mostrar_imagen():
     LOGO_LABEL.grid_rowconfigure(0, weight=1)
     LOGO_LABEL.grid_columnconfigure(1, weight=1)
 
+# Crea la cuadrícula de la ventana
 def windowsGrid():
     # Camera
    
@@ -77,13 +81,14 @@ def windowsGrid():
     TERMINAL_SCROLLBAR.grid(row=0, column=1, sticky="nsew")
     TERMINAL_TEXT["yscrollcommand"] = TERMINAL_SCROLLBAR.set
 
-
+# Agrega un mensaje a la terminal
 def add_message(message,style=None):
     timestamp = datetime.datetime.now().strftime("%H:%M:%S")  # Obtiene la hora actual en formato HH:MM
     TERMINAL_TEXT.insert(tk.END, timestamp + " - ")
     TERMINAL_TEXT.insert(tk.END, message + "\n", style)
     TERMINAL_TEXT.see(tk.END)
 
+# Actualiza la cámara
 def update_camera(image):
     CAMERA_LABEL.configure(image=image)
     CAMERA_LABEL.image = image
